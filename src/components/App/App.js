@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import './App.css';
 
 import CalendarGrid from '../CalendarGrid/CalendarGrid';
-import { daysArr, monthsArr, dateFns } from '../../utils/dateFns';
 
 const styles = theme => ( {
     root: {
