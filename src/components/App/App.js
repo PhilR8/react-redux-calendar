@@ -5,6 +5,9 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import './App.css';
 
+import CalendarGrid from '../CalendarGrid/CalendarGrid';
+import { daysArr, monthsArr, dateFns } from '../../utils/dateFns';
+
 const styles = theme => ( {
     root: {
         display: 'flex',
@@ -27,14 +30,6 @@ const styles = theme => ( {
         alignItems: 'center',
         justifyContent: 'center',
         height: '150px'
-    },
-    calendarGrid: {
-        display: 'flex',
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-        flex: 1
     }
 } )
 
@@ -61,7 +56,7 @@ class App extends Component {
                             { month } { year }
                         </Typography>               
                     </header>
-                    <div className={ classes.calendarGrid }>test</div>
+                    <CalendarGrid />
                 </Paper>
             </div>
         );
