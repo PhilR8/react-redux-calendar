@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import startOfMonth from 'date-fns/start_of_month'
+
 import { daysArr, monthsArr, dateFns } from '../../utils/dateFns';
+
+console.log( startOfMonth( new Date() ) );
 
 const styles = theme => ( {
     calendarGrid: {
@@ -11,8 +15,7 @@ const styles = theme => ( {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
-        border: '1px solid lightgray'
+        width: '100%'
     },
     daysRow: {
         display: 'flex',
@@ -24,7 +27,8 @@ const styles = theme => ( {
     monthGrid: {
         display: 'flex',
         width: '100%',
-        flexGrow: 1
+        flexGrow: 1,
+        flexDirection: 'row'
     }
 } );
 
