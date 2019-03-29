@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import { withStyles } from '@material-ui/core/styles';
 
 import dateFns from 'date-fns';
@@ -39,6 +41,22 @@ const styles = theme => ( {
         flex: '1 0 13%',
         border: '1px solid lightgray',
         backgroundColor: 'rgba( 211, 211, 211, 0.4 )'
+    },
+    dateNumber: {
+        margin: 10,
+        height: '23px',
+        width: '23px',
+        fontSize: '0.85rem',
+        color: '#000',
+        backgroundColor: 'transparent'
+    },
+    todayAvatar: {
+        margin: 5,
+        height: '28px',
+        width: '28px',
+        fontSize: '0.85rem',
+        color: '#fff',
+        backgroundColor: deepPurple[500],
     }
 } );
 
@@ -46,7 +64,10 @@ const DayCell = ( props ) =>
     <div 
         className={ dateFns.isSameMonth( props.dateObj.date, props.calendarDate ) ? props.classes.dayCell : props.classes.dayCellOutsideMonth }
     >
-        { dateFns.getDate( props.dateObj.date ) }
+        { dateFns.isToday( props.dateObj.date ) 
+            ? <Avatar className={ props.classes.todayAvatar }>{ dateFns.getDate( props.dateObj.date ) }</Avatar>
+            : <Avatar className={ props.classes.dateNumber }>{ dateFns.getDate( props.dateObj.date ) }</Avatar>
+        }
     </div>;
 
 DayCell.propTypes = {

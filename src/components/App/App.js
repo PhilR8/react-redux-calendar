@@ -35,7 +35,7 @@ const styles = theme => ( {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: '150px',
+        height: '100px',
         width: '100%'
     }
 } )
