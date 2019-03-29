@@ -34,11 +34,20 @@ const styles = theme => ( {
     dayCell: {
         flex: '1 0 13%',
         border: '1px solid lightgray'
-        
+    },
+    dayCellOutsideMonth: {
+        flex: '1 0 13%',
+        border: '1px solid lightgray',
+        backgroundColor: 'rgba( 211, 211, 211, 0.4 )'
     }
 } );
 
-const DayCell = ( props ) => <div className={ props.classes.dayCell}>{ dateFns.getDate( props.dateObj.date ) }</div>;
+const DayCell = ( props ) => 
+    <div 
+        className={ dateFns.isThisMonth( props.dateObj.date ) ? props.classes.dayCell : props.classes.dayCellOutsideMonth }
+    >
+        { dateFns.getDate( props.dateObj.date ) }
+    </div>;
 
 DayCell.propTypes = {
     classes: PropTypes.object.isRequired,
