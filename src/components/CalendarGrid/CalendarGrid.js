@@ -28,11 +28,12 @@ const styles = theme => ( {
         width: '100%',
         flexGrow: 1,
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        border: '1px solid lightgray'
     },
     dayCell: {
         flex: '1 0 13%',
-        border: '3px solid red'
+        border: '1px solid lightgray'
         
     }
 } );
