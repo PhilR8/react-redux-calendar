@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { withStyles } from '@material-ui/core/styles';
-import startOfMonth from 'date-fns/start_of_month';
-import getDaysInMonth from 'date-fns/get_days_in_month';
+
+import dateFns from 'date-fns';
 
 import CalendarGrid from '../CalendarGrid/CalendarGrid';
 
@@ -30,8 +34,9 @@ const styles = theme => ( {
     calendarHeader: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
-        height: '150px'
+        justifyContent: 'space-between',
+        height: '150px',
+        width: '100%'
     }
 } )
 
@@ -39,19 +44,8 @@ class App extends Component {
     constructor( props ) {
         super( props );
 
-        const date = new Date();
-        const year = date.getFullYear();
-        const firstDayOfMonth = startOfMonth( date ).getDay();
-        const daysInMonth = getDaysInMonth( date );
-        const weeksToRender = Math.ceil( ( daysInMonth + firstDayOfMonth ) / 7 );
-
         this.state = { 
-            date, 
-            month: date.toLocaleString( 'en-us', { month: 'long' } ),
-            year,
-            firstDayOfMonth,
-            daysInMonth,
-            weeksToRender
+            date: new Date()
         };
     }
 
@@ -59,16 +53,39 @@ class App extends Component {
         
     }
 
+    // arrow functions to skip binding in constructor
+    prevMonth = () => {
+        this.setState( { date: dateFns.subMonths( this.state.date, 1 ) } );
+    }
+
+    nextMonth = () => {
+        this.setState( { date: dateFns.addMonths( this.state.date, 1 ) } );
+    }
+
     render() {
         const { classes } = this.props;
-        const { date, firstDayOfMonth, daysInMonth, weeksToRender } = this.state;
+        const { date } = this.state;
+
+        const month = date.toLocaleString( 'en-us', { month: 'long' } );
+        const year = dateFns.getYear( date );
+
+        const firstDayOfMonth = dateFns.startOfMonth( date ).getDay();
+        const daysInMonth = dateFns.getDaysInMonth( date );
+        const weeksToRender = Math.ceil( ( daysInMonth + firstDayOfMonth ) / 7 );
+
         return (
             <div className={ classes.root }>
                 <Paper className={ classes.calendar }>
                     <header className={ classes.calendarHeader }>
-                        <Typography component="h2" variant="h1">
-                            { this.state.month } { this.state.year }
+                        <IconButton aria-label="Last Month" onClick={ this.prevMonth }>
+                            <KeyboardArrowLeftIcon fontSize="large" />
+                        </IconButton>
+                        <Typography variant="h3">
+                            { month } { year }
                         </Typography>               
+                        <IconButton aria-label="Next Month" onClick={ this.nextMonth }>
+                            <KeyboardArrowRightIcon fontSize="large" />
+                        </IconButton>
                     </header>
                     <CalendarGrid 
                         date={ date } 
