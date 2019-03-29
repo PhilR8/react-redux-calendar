@@ -31,7 +31,7 @@ const styles = theme => ( {
         flexWrap: 'wrap'
     },
     dayCell: {
-        flex: '1 0 12%',
+        flex: '1 0 13%',
         border: '3px solid red'
         
     }
