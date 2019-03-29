@@ -65,7 +65,6 @@ DaysRow.propTypes = {
 class MonthGrid extends Component {
     constructor( props ) {
         super( props );
-        console.log( this.props );
     }
 
     render() {
@@ -89,21 +88,18 @@ MonthGrid.propTypes = {
 class CalendarGrid extends Component {
     constructor( props ) {
         super( props );
-
-        this.state = {
-            calendarCells: getMonthGrid( this.props.date )
-        }
     }
 
     render() {
         const { classes, date } = this.props;
+        const calendarCells = getMonthGrid( this.props.date );
         return (
             <div className={ classes.calendarGrid }>
                 <DaysRow classes={ classes } />
                 <MonthGrid 
                     classes={ classes } 
                     date={ date }
-                    calendarCells={ this.state.calendarCells }
+                    calendarCells={ calendarCells }
                 />
             </div>
         )
