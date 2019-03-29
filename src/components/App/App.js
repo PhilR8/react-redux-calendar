@@ -69,10 +69,6 @@ class App extends Component {
         const month = date.toLocaleString( 'en-us', { month: 'long' } );
         const year = dateFns.getYear( date );
 
-        const firstDayOfMonth = dateFns.startOfMonth( date ).getDay();
-        const daysInMonth = dateFns.getDaysInMonth( date );
-        const weeksToRender = Math.ceil( ( daysInMonth + firstDayOfMonth ) / 7 );
-
         return (
             <div className={ classes.root }>
                 <Paper className={ classes.calendar }>
@@ -89,9 +85,6 @@ class App extends Component {
                     </header>
                     <CalendarGrid 
                         date={ date } 
-                        firstDayOfMonth={ firstDayOfMonth }
-                        daysInMonth={ daysInMonth }
-                        weeksToRender={ weeksToRender }
                     />
                 </Paper>
             </div>

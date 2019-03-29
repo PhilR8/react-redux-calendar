@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import { daysArr, monthsArr, dateFns } from '../../utils/dateFns';
+import dateFns from 'date-fns';
+
+import { daysArr, monthsArr, getMonthGrid } from '../../utils/dateUtils';
 
 const styles = theme => ( {
     calendarGrid: {
@@ -35,10 +37,11 @@ const styles = theme => ( {
     }
 } );
 
-const DayCell = ( props ) => <div className={ props.classes.dayCell}>Test</div>;
+const DayCell = ( props ) => <div className={ props.classes.dayCell}>{ dateFns.getDate( props.dateObj.date ) }</div>;
 
 DayCell.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) 
 }
 
 const DayName = ( props ) => <Typography variant="h6">{ props.day }</Typography>;
@@ -66,57 +69,12 @@ class MonthGrid extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, date, calendarCells } = this.props;
         return (
             <div className={ classes.monthGrid }>
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-                <DayCell classes={ classes } />
-
+                { calendarCells.map( ( dateObj, i ) =>
+                    <DayCell key={ i } classes={ classes } dateObj={ dateObj } />
+                ) }
             </div>
         )
     }
@@ -124,26 +82,28 @@ class MonthGrid extends Component {
 
 MonthGrid.propTypes = {
     classes: PropTypes.object.isRequired,
-    firstDayOfMonth: PropTypes.number.isRequired,
-    daysInMonth: PropTypes.number.isRequired,
-    weeksToRender: PropTypes.number.isRequired
+    date: PropTypes.instanceOf( Date ).isRequired,
+    calendarCells: PropTypes.arrayOf( PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) )
 }
 
 class CalendarGrid extends Component {
     constructor( props ) {
         super( props );
+
+        this.state = {
+            calendarCells: getMonthGrid( this.props.date )
+        }
     }
 
     render() {
-        const { classes, firstDayOfMonth, daysInMonth, weeksToRender } = this.props;
+        const { classes, date } = this.props;
         return (
             <div className={ classes.calendarGrid }>
                 <DaysRow classes={ classes } />
                 <MonthGrid 
                     classes={ classes } 
-                    firstDayOfMonth={ firstDayOfMonth }
-                    daysInMonth={ daysInMonth }
-                    weeksToRender={ weeksToRender }
+                    date={ date }
+                    calendarCells={ this.state.calendarCells }
                 />
             </div>
         )
@@ -152,10 +112,7 @@ class CalendarGrid extends Component {
 
 CalendarGrid.propTypes = {
     classes: PropTypes.object.isRequired,
-    date: PropTypes.instanceOf( Date ).isRequired,
-    firstDayOfMonth: PropTypes.number.isRequired,
-    daysInMonth: PropTypes.number.isRequired,
-    weeksToRender: PropTypes.number.isRequired
+    date: PropTypes.instanceOf( Date ).isRequired
 }
 
 export default withStyles( styles )( CalendarGrid );
