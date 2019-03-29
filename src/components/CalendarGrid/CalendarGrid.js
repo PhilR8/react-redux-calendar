@@ -44,13 +44,14 @@ const styles = theme => ( {
 
 const DayCell = ( props ) => 
     <div 
-        className={ dateFns.isThisMonth( props.dateObj.date ) ? props.classes.dayCell : props.classes.dayCellOutsideMonth }
+        className={ dateFns.isSameMonth( props.dateObj.date, props.calendarDate ) ? props.classes.dayCell : props.classes.dayCellOutsideMonth }
     >
         { dateFns.getDate( props.dateObj.date ) }
     </div>;
 
 DayCell.propTypes = {
     classes: PropTypes.object.isRequired,
+    calendarDate: PropTypes.instanceOf( Date ),
     dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) 
 }
 
@@ -82,7 +83,7 @@ class MonthGrid extends Component {
         return (
             <div className={ classes.monthGrid }>
                 { calendarCells.map( ( dateObj, i ) =>
-                    <DayCell key={ i } classes={ classes } dateObj={ dateObj } />
+                    <DayCell key={ i } classes={ classes } calendarDate={ date } dateObj={ dateObj } />
                 ) }
             </div>
         )
