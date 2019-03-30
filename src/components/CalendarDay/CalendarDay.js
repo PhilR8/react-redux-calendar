@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -48,13 +49,24 @@ const styles = theme => ( {
         fontSize: '0.85rem',
         color: '#fff',
         backgroundColor: deepPurple[800],
-    },
+    }, 
+    reminder: {
+        color: '#000',
+        backgroundColor: 'pink'
+    }
     
 } );
+
+const Reminder = ( props ) => 
+    <div className={ props.classes.reminder }>
+        <Typography variant='body2'>{ props.reminder.text }</Typography>
+    </div>
 
 class CalendarDay extends Component {
     constructor( props ) {
         super( props );
+
+        console.log( this.props.reminders );
 
         this.state = {
             focused: false
@@ -74,7 +86,7 @@ class CalendarDay extends Component {
     }
 
     render() {
-        const { classes, dateObj, calendarDate } = this.props;
+        const { classes, dateObj, calendarDate, reminders } = this.props;
         const { focused } = this.state;
         const isToday = dateFns.isToday( dateObj.date );
 
@@ -98,6 +110,9 @@ class CalendarDay extends Component {
                 }
             >
                 <Avatar className={ avatarClass }>{ dateFns.getDate( dateObj.date ) }</Avatar>
+                { reminders.map( ( reminder, i ) => 
+                    <Reminder key={ i } reminder={ reminder } classes={ classes } /> 
+                ) }
             </div>
         )
     }
@@ -106,7 +121,8 @@ class CalendarDay extends Component {
 CalendarDay.propTypes = {
     classes: PropTypes.object.isRequired,
     calendarDate: PropTypes.instanceOf( Date ),
-    dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) 
+    dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ),
+    reminders: PropTypes.array.isRequired
 }
 
 export default withStyles( styles )( CalendarDay );
