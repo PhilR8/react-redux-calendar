@@ -19,29 +19,22 @@ const styles = theme => ( {
 class AgendaDay extends React.Component {
     constructor( props ) {
         super( props );
-
-        this.state = { 
-            open: false
-        }
     }
 
-    handleClickOpen = () => {
-        this.setState( { open: true } );
-    };
-
-    handleClose = () => {
-        this.setState( { open: false } );
-    };
-
     render() {
-        const { agendaStatus, reminders } = this.props;
+        const { agendaStatus, reminders, onClose } = this.props;
         return (
             <Dialog
                 open={ agendaStatus.isOpen }
-                onClose={ this.handleClose }
+                onClose={ onClose }
                 aria-labelledby="form-dialog-title"
             >
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <DialogTitle id="form-dialog-title">
+                    { agendaStatus.date
+                        ? dateFns.format( agendaStatus.date, 'dddd MMMM Do, YYYY' ) 
+                        : 'Closing' // dialog close animation takes a while - need to figure this out
+                    }
+                </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         To subscribe to this website, please enter your email address here. We will send
@@ -57,10 +50,10 @@ class AgendaDay extends React.Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={ onClose } color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
+                    <Button onClick={ onClose } color="primary">
                         Subscribe
                     </Button>
                 </DialogActions>

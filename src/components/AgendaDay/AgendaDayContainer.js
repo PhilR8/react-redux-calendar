@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { openAgenda } from '../../redux/actions';
 import AgendaDay from './AgendaDay';
+import { closeAgenda } from '../../redux/actions';
 
 import dateFns from 'date-fns';
 
@@ -15,10 +15,12 @@ const mapStateToProps = ( state, ownProps ) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-
+        onClose: () => {
+            dispatch( closeAgenda() );
+        }
     }    
 }
 
-const AgendaDayContainer = connect( mapStateToProps )( AgendaDay );
+const AgendaDayContainer = connect( mapStateToProps, mapDispatchToProps )( AgendaDay );
 
 export default AgendaDayContainer;
