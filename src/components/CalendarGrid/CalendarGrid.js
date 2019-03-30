@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import { withStyles } from '@material-ui/core/styles';
 
-import dateFns from 'date-fns';
+import CalendarDay from '../CalendarDay/CalendarDay';
 
-import { daysArr, monthsArr, getMonthGrid } from '../../utils/dateUtils';
+import { daysArr, getMonthCells } from '../../utils/dateUtils';
 
 const styles = theme => ( {
     calendarGrid: {
@@ -25,56 +23,15 @@ const styles = theme => ( {
         justifyContent: 'space-evenly',
         alignItems: 'center'
     },
-    monthGrid: {
+    monthContainer: {
         display: 'flex',
         width: '100%',
         flexGrow: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
         border: '1px solid lightgray'
-    },
-    dayCell: {
-        flex: '1 0 13%',
-        border: '1px solid lightgray'
-    },
-    dayCellOutsideMonth: {
-        flex: '1 0 13%',
-        border: '1px solid lightgray',
-        backgroundColor: 'rgba( 211, 211, 211, 0.4 )'
-    },
-    dateNumber: {
-        margin: 10,
-        height: '23px',
-        width: '23px',
-        fontSize: '0.85rem',
-        color: '#000',
-        backgroundColor: 'transparent'
-    },
-    todayAvatar: {
-        margin: 5,
-        height: '28px',
-        width: '28px',
-        fontSize: '0.85rem',
-        color: '#fff',
-        backgroundColor: deepPurple[500],
     }
 } );
-
-const DayCell = ( props ) => 
-    <div 
-        className={ dateFns.isSameMonth( props.dateObj.date, props.calendarDate ) ? props.classes.dayCell : props.classes.dayCellOutsideMonth }
-    >
-        { dateFns.isToday( props.dateObj.date ) 
-            ? <Avatar className={ props.classes.todayAvatar }>{ dateFns.getDate( props.dateObj.date ) }</Avatar>
-            : <Avatar className={ props.classes.dateNumber }>{ dateFns.getDate( props.dateObj.date ) }</Avatar>
-        }
-    </div>;
-
-DayCell.propTypes = {
-    classes: PropTypes.object.isRequired,
-    calendarDate: PropTypes.instanceOf( Date ),
-    dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) 
-}
 
 const DayName = ( props ) => <Typography variant="h6">{ props.day }</Typography>;
 
@@ -94,24 +51,14 @@ DaysRow.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-class MonthGrid extends Component {
-    constructor( props ) {
-        super( props );
-    }
+const MonthContainer = ( props ) => 
+    <div className={ props.classes.monthContainer }>
+        { props.calendarCells.map( ( dateObj, i ) =>
+            <CalendarDay key={ i } calendarDate={ props.date } dateObj={ dateObj } />
+        ) }
+    </div>
 
-    render() {
-        const { classes, date, calendarCells } = this.props;
-        return (
-            <div className={ classes.monthGrid }>
-                { calendarCells.map( ( dateObj, i ) =>
-                    <DayCell key={ i } classes={ classes } calendarDate={ date } dateObj={ dateObj } />
-                ) }
-            </div>
-        )
-    }
-}
-
-MonthGrid.propTypes = {
+MonthContainer.propTypes = {
     classes: PropTypes.object.isRequired,
     date: PropTypes.instanceOf( Date ).isRequired,
     calendarCells: PropTypes.arrayOf( PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ) )
@@ -124,11 +71,11 @@ class CalendarGrid extends Component {
 
     render() {
         const { classes, date } = this.props;
-        const calendarCells = getMonthGrid( this.props.date );
+        const calendarCells = getMonthCells( this.props.date );
         return (
             <div className={ classes.calendarGrid }>
                 <DaysRow classes={ classes } />
-                <MonthGrid 
+                <MonthContainer 
                     classes={ classes } 
                     date={ date }
                     calendarCells={ calendarCells }
