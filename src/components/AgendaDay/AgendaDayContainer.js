@@ -7,7 +7,7 @@ import dateFns from 'date-fns';
 const mapStateToProps = ( state, ownProps ) => {
     const { agendaStatus } = ownProps;
     const reminders = agendaStatus.isOpen
-        ? state.reminders.filter( reminder => dateFns.isSameDay( reminder.date, agendaStatus.date.date ) )
+        ? state.reminders.filter( reminder => dateFns.isSameDay( reminder.date, agendaStatus.date ) )
         : [];
 
     return { reminders, agendaStatus };
