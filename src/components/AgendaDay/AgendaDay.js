@@ -28,6 +28,8 @@ class AgendaDay extends React.Component {
                 open={ agendaStatus.isOpen }
                 onClose={ onClose }
                 aria-labelledby="form-dialog-title"
+                fullWidth={ true }
+                maxWidth='md'
             >
                 <DialogTitle id="form-dialog-title">
                     { agendaStatus.date
@@ -37,24 +39,11 @@ class AgendaDay extends React.Component {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send
-                        updates occasionally.
                     </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Email Address"
-                        type="email"
-                        fullWidth
-                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={ onClose } color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={ onClose } color="primary">
-                        Subscribe
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>
