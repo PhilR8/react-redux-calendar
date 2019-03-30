@@ -68,8 +68,6 @@ class CalendarDay extends Component {
     constructor( props ) {
         super( props );
 
-        console.log( this.props.reminders );
-
         this.state = {
             focused: false
         }
@@ -83,12 +81,8 @@ class CalendarDay extends Component {
         this.setState( { focused: false } );
     }
 
-    onClick = () => {
-        console.log( this.props.dateObj.date );
-    }
-
     render() {
-        const { classes, dateObj, calendarDate, reminders } = this.props;
+        const { classes, dateObj, calendarDate, reminders, onDayClick } = this.props;
         const { focused } = this.state;
         const isToday = dateFns.isToday( dateObj.date );
 
@@ -104,7 +98,7 @@ class CalendarDay extends Component {
             <div 
                 onMouseOver={ this.onMouseOver }
                 onMouseOut={ this.onMouseOut }
-                onClick={ this.onClick }
+                onClick={ () => onDayClick( dateObj ) }
                 className={ 
                     dateFns.isSameMonth( dateObj.date, calendarDate ) 
                         ? classes.dayCell 

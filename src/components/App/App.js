@@ -12,6 +12,8 @@ import dateFns from 'date-fns';
 
 import CalendarGrid from '../CalendarGrid/CalendarGrid';
 
+import AgendaDayContainer from '../AgendaDay/AgendaDayContainer'
+
 import './App.css';
 
 const styles = theme => ( {
@@ -63,7 +65,7 @@ class App extends Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, agendaStatus } = this.props;
         const { date } = this.state;
 
         const month = date.toLocaleString( 'en-us', { month: 'long' } );
@@ -87,6 +89,7 @@ class App extends Component {
                         date={ date } 
                     />
                 </Paper>
+                <AgendaDayContainer agendaStatus={ agendaStatus } />
             </div>
         );
     }

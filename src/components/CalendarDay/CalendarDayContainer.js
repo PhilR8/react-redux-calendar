@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import CalendarDay from './CalendarDay';
+import { openAgenda } from '../../redux/actions';
 
 import dateFns from 'date-fns';
 
@@ -10,6 +11,14 @@ const mapStateToProps = ( state, ownProps ) => {
     return { reminders };
 }
 
-const CalendarDayContainer = connect( mapStateToProps )( CalendarDay );
+const mapDispatchToProps = dispatch =>{
+    return {
+        onDayClick: dateObj => {
+            dispatch( openAgenda( dateObj ) )
+        }
+    }    
+}
+
+const CalendarDayContainer = connect( mapStateToProps, mapDispatchToProps )( CalendarDay );
 
 export default CalendarDayContainer;
