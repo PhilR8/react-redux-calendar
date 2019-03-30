@@ -69,6 +69,10 @@ class CalendarDay extends Component {
         this.setState( { focused: false } );
     }
 
+    onClick = () => {
+        console.log( this.props.dateObj.date );
+    }
+
     render() {
         const { classes, dateObj, calendarDate } = this.props;
         const { focused } = this.state;
@@ -81,10 +85,12 @@ class CalendarDay extends Component {
                 : focused
                     ? classes.focusedAvatar
                     : classes.dateNumber;
+
         return (
             <div 
                 onMouseOver={ this.onMouseOver }
                 onMouseOut={ this.onMouseOut }
+                onClick={ this.onClick }
                 className={ 
                     dateFns.isSameMonth( dateObj.date, calendarDate ) 
                         ? classes.dayCell 
