@@ -2,7 +2,7 @@
 
 React Redux Calendar is a monthly calendar that allows the user to add, edit, and delete reminders.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project uses React v16.8 and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This project also uses:
 - Redux v4
