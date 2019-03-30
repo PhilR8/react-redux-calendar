@@ -9,6 +9,7 @@ import * as serviceWorker from './serviceWorker';
 
 const store = createStore( 
     calendarApp,
+    { reminders: [ { date: new Date(), color: 'red', text: 'Create a reminder' } ] },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

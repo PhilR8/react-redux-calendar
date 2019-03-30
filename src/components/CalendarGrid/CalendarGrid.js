@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import CalendarDay from '../CalendarDay/CalendarDay';
+import CalendarDayContainer from '../CalendarDay/CalendarDayContainer';
 
 import { daysArr, getMonthCells } from '../../utils/dateUtils';
 
@@ -54,7 +54,7 @@ DaysRow.propTypes = {
 const MonthContainer = ( props ) => 
     <div className={ props.classes.monthContainer }>
         { props.calendarCells.map( ( dateObj, i ) =>
-            <CalendarDay key={ i } calendarDate={ props.date } dateObj={ dateObj } />
+            <CalendarDayContainer key={ i } calendarDate={ props.date } dateObj={ dateObj } />
         ) }
     </div>
 
