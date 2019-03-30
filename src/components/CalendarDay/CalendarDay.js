@@ -59,7 +59,9 @@ const styles = theme => ( {
 
 const Reminder = ( props ) => 
     <div className={ props.classes.reminder }>
-        <Typography variant='body2'>{ props.reminder.text }</Typography>
+        <Typography variant='caption'>
+            { dateFns.format( props.reminder.date, 'H:mma' ) } { props.reminder.text }
+        </Typography>
     </div>
 
 class CalendarDay extends Component {
