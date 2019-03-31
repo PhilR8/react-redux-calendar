@@ -6,13 +6,17 @@ import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 
 import dateFns from 'date-fns';
 
 import CalendarGrid from '../CalendarGrid/CalendarGrid';
 
-import AgendaDayContainer from '../AgendaDay/AgendaDayContainer'
+import AgendaDayContainer from '../AgendaDay/AgendaDayContainer';
+import AddReminderContainer from '../AddReminder/AddReminderContainer';
 
 import './App.css';
 
@@ -39,6 +43,16 @@ const styles = theme => ( {
         justifyContent: 'space-between',
         height: '100px',
         width: '100%'
+    },
+    fabAdd: {
+        position: 'absolute',
+        bottom: '60px',
+        right: '50px',
+        color: '#FFF',
+        backgroundColor: green[600],
+        '&:hover': {
+            backgroundColor: green[800]
+        }
     }
 } )
 
@@ -65,7 +79,7 @@ class App extends Component {
     }
 
     render() {
-        const { classes, agendaStatus } = this.props;
+        const { classes, agendaStatus, addReminderStatus, onFabAddClick } = this.props;
         const { date } = this.state;
 
         const month = date.toLocaleString( 'en-us', { month: 'long' } );
@@ -88,8 +102,16 @@ class App extends Component {
                     <CalendarGrid 
                         date={ date } 
                     />
+                    <Fab 
+                        aria-label="Add" 
+                        className={classes.fabAdd}
+                        onClick={ onFabAddClick }
+                    >
+                        <AddIcon />
+                    </Fab>
                 </Paper>
                 <AgendaDayContainer agendaStatus={ agendaStatus } />
+                <AddReminderContainer addReminderStatus={ addReminderStatus } />
             </div>
         );
     }

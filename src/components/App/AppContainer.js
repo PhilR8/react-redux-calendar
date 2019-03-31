@@ -1,11 +1,21 @@
 import { connect } from 'react-redux';
 import App from './App';
+import { openAddReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {
-    const agendaStatus = state.agendaStatus; 
-    return { agendaStatus };
+    const { agendaStatus, addReminderStatus } = state; 
+
+    return { agendaStatus, addReminderStatus };
 }
 
-const AppContainer = connect( mapStateToProps )( App );
+const mapDispatchToProps = dispatch => {
+    return {
+        onFabAddClick: () => {
+            dispatch( openAddReminder() );
+        }
+    }
+}
+
+const AppContainer = connect( mapStateToProps, mapDispatchToProps )( App );
 
 export default AppContainer;

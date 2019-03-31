@@ -11,7 +11,7 @@ const mapStateToProps = ( state, ownProps ) => {
     return { reminders };
 }
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
     return {
         onDayClick: dateObj => {
             dispatch( openAgenda( dateObj ) )
