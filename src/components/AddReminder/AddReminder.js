@@ -23,14 +23,17 @@ import { withStyles } from '@material-ui/core/styles';
 import dateFns from 'date-fns';
 
 const styles = theme => ( {
-    addReminderFormContainer: {
-        minHeight: '250px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginTop: '10px'
+    remindersContainer: {
+        minHeight: '250px'
     },
-    reminderTextInput: {
+    fabAdd: {
+        margin: '20px',
+        color: '#FFF',
+        backgroundColor: green[600],
+        '&:hover': {
+            backgroundColor: green[800],
+        }
+
     },
     closeButton: {
         position: 'absolute',
@@ -61,21 +64,11 @@ class AddReminder extends React.Component {
                     </IconButton>
                 </DialogTitle>
                 <Divider light />
-                <DialogContent className={ classes.addReminderFormContainer }>
-                    <TextField
-                        className={ classes.reminderTextInput }
-                        id="outlined-full-width"
-                        label="Add Reminder (max 30 characters)"
-                        style={{ margin: 8 }}
-                        placeholder="Example: Buy Groceries"
-                        fullWidth
-                        margin="normal"
-                        maxLength="30"
-                        variant="outlined"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
+                <DialogContent className={ classes.remindersContainer }>
+                    <DialogContentText className={ classes.noRemindersText }>
+                        Testing
+                    </DialogContentText>
+                    <AddReminderForm />
                 </DialogContent>
                 <DialogActions>
                     <Button color="primary">
