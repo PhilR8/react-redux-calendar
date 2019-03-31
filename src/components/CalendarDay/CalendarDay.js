@@ -51,16 +51,14 @@ const styles = theme => ( {
         backgroundColor: deepPurple[800],
     }, 
     reminder: {
-        color: '#000',
-        backgroundColor: 'pink'
+        color: '#000'
     }
-    
 } );
 
 const Reminder = ( props ) => 
-    <div className={ props.classes.reminder }>
+    <div className={ props.classes.reminder } style={{ backgroundColor: props.reminder.color }}>
         <Typography variant='caption'>
-            { dateFns.format( props.reminder.date, 'H:mma' ) } { props.reminder.text }
+            { dateFns.format( props.reminder.date, 'H:mma' ) }: { props.reminder.text }
         </Typography>
     </div>
 

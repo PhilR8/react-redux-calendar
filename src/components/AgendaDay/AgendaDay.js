@@ -52,9 +52,14 @@ class AgendaDay extends React.Component {
                         reminders.length == 0
                             ? <p>No Reminders found for this date.</p>
                             : reminders.map( ( reminder, i ) => 
-                                <Paper key={ i } className={ classes.reminder } elevation={ 1 }>
+                                <Paper 
+                                    key={ i } 
+                                    className={ classes.reminder } 
+                                    elevation={ 1 }
+                                    style={{ backgroundColor: reminder.color }}
+                                >
                                     <Typography variant='h5'>
-                                        { dateFns.format( reminder.date, 'H:mma' ) } { reminder.text }
+                                        { dateFns.format( reminder.date, 'H:mma' ) }: { reminder.text }
                                     </Typography>
                                 </Paper>
                             ) 
