@@ -19,6 +19,12 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import dateFns from 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    DatePicker,
+    TimePicker,
+    MuiPickersUtilsProvider,
+} from "material-ui-pickers";
 
 const styles = theme => ( {
     addReminderFormContainer: {
@@ -27,14 +33,10 @@ const styles = theme => ( {
         display: 'flex',
         flexDirection: 'column'
     },
-    fabAdd: {
-        margin: '20px',
-        color: '#FFF',
-        backgroundColor: green[600],
-        '&:hover': {
-            backgroundColor: green[800],
-        }
-
+    pickers: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        padding: '15px'
     },
     closeButton: {
         position: 'absolute',
@@ -43,13 +45,22 @@ const styles = theme => ( {
     }
 } );
 
-class AddReminder extends React.Component {
+class AddReminder extends React.Component{
     constructor( props ) {
         super( props );
+
+        this.state = {
+            selectedDate: new Date()
+        }
     }
+
+    handleDateChange = date => {
+        this.setState({ selectedDate: date });
+    };
 
     render() {
         const { classes, addReminderStatus, onClose } = this.props;
+        const { selectedDate } = this.state;
         return (
             <Dialog
                 open={ addReminderStatus.isOpen }
@@ -66,15 +77,29 @@ class AddReminder extends React.Component {
                 </DialogTitle>
                 <Divider light />
                 <DialogContent className={ classes.addReminderFormContainer }>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <div className={ classes.pickers }>
+                            <DatePicker 
+                                margin="normal"
+                                label="Date picker"
+                                value={selectedDate}
+                                onChange={this.handleDateChange}
+                            />
+                            <TimePicker 
+                                margin="normal"
+                                label="Time picker"
+                                value={selectedDate}
+                                onChange={this.handleDateChange}
+                            />
+                        </div>
+                    </MuiPickersUtilsProvider>
                     <TextField
-                        id="outlined-full-width"
+                        id="full-width"
                         label="Add Reminder (max 30 characters)"
                         style={{ margin: 8 }}
                         placeholder="Example: Buy Groceries"
-                        fullWidth
                         margin="normal"
                         maxLength="30"
-                        variant="outlined"
                         InputLabelProps={{
                             shrink: true,
                         }}
