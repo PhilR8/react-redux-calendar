@@ -65,10 +65,6 @@ MonthContainer.propTypes = {
 }
 
 class CalendarGrid extends Component {
-    constructor( props ) {
-        super( props );
-    }
-
     render() {
         const { classes, date } = this.props;
         const calendarCells = getMonthCells( this.props.date );

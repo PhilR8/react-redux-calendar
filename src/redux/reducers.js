@@ -40,10 +40,10 @@ function reminders( state = [], action ) {
                 }
             ]
         case DELETE_REMINDER:
-            return state.filter( reminder => reminder.date.getTime() != action.epochTime )
+            return state.filter( reminder => reminder.date.getTime() !== action.epochTime )
         case UPDATE_REMINDER:
             return state.map( reminder => {
-                if( reminder.date.getTime() == action.reminderObj.date.getTime() ) {
+                if( reminder.date.getTime() === action.reminderObj.date.getTime() ) {
                     return action.reminderObj
                 }  
                 return reminder

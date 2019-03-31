@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import CloseIcon from '@material-ui/icons/Close';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
+import Fab from '@material-ui/core/Fab';
+import green from '@material-ui/core/colors/green';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -22,7 +27,24 @@ const styles = theme => ( {
     reminder: {
         margin: '15px',
         padding: '15px'
-    } 
+    },
+    noRemindersText: {
+        marginTop: '10px'
+    },
+    fabAdd: {
+        margin: '20px',
+        color: '#FFF',
+        backgroundColor: green[600],
+        '&:hover': {
+            backgroundColor: green[800],
+        }
+
+    },
+    closeButton: {
+        position: 'absolute',
+        right: '10px',
+        top: '10px'
+    }
 } );
 
 class AgendaDay extends React.Component {
@@ -45,12 +67,17 @@ class AgendaDay extends React.Component {
                         ? dateFns.format( agendaStatus.date, 'dddd MMMM Do, YYYY' ) 
                         : 'Closing' // dialog close animation takes a while - need to figure this out
                     }
+                    <IconButton aria-label="Close" className={ classes.closeButton } onClick={ onClose }>
+                        <CloseIcon />
+                    </IconButton>
                 </DialogTitle>
                 <Divider light />
                 <DialogContent className={ classes.remindersContainer }>
                     { 
-                        reminders.length == 0
-                            ? <p>No Reminders found for this date.</p>
+                        reminders.length === 0
+                            ? <DialogContentText className={ classes.noRemindersText }>
+                                No reminders found for this date.
+                              </DialogContentText>
                             : reminders.map( ( reminder, i ) => 
                                 <Paper 
                                     key={ i } 
@@ -66,9 +93,9 @@ class AgendaDay extends React.Component {
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={ onClose } color="primary">
-                        Close
-                    </Button>
+                    <Fab className={ classes.fabAdd } aria-label="Add">
+                        <AddIcon />
+                    </Fab>
                 </DialogActions>
             </Dialog>
         );
