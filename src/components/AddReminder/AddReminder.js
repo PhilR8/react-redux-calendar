@@ -9,6 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
 import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -45,6 +46,10 @@ const styles = theme => ( {
         flex: '0 0 201px',
         marginTop: '16px',
         marginBottom: '8px'
+    },
+    characterWarning: {
+        marginLeft: '8px',
+        color: '#b71c1c'
     }
 } );
 
@@ -78,7 +83,7 @@ class AddReminder extends React.Component{
 
     render() {
         const { classes, addReminderStatus, onClose, onAddClick } = this.props;
-        const { date, time, color } = this.state;
+        const { date, time, color, text } = this.state;
 
         return (
             <Dialog
@@ -131,7 +136,7 @@ class AddReminder extends React.Component{
                         </div>
                     </MuiPickersUtilsProvider>
                     <TextField
-                        id='full-width'
+                        id='add-reminder-text-field'
                         label='Add Reminder (max 30 characters)'
                         style={{ margin: 8 }}
                         placeholder='Example: Buy Groceries'
@@ -142,9 +147,15 @@ class AddReminder extends React.Component{
                         }}
                         onChange={ this.handleReminderTextChange }
                     />
+                    { text.length === 0 &&
+                        <FormHelperText className={ classes.characterWarning } id='add-reminder-helper-text-field'>This field cannot be empty</FormHelperText>
+                    }
+                    { text.length > 30 &&
+                        <FormHelperText className={ classes.characterWarning } id='add-reminder-helper-text-field'>Your reminder is too long by { text.length - 30 } characters.</FormHelperText>
+                    }
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary' onClick={ () => onAddClick( this.state ) }>
+                    <Button disabled={ text.length === 0 || text.length > 30 } color='primary' onClick={ () => onAddClick( this.state ) }>
                         Add Reminder
                     </Button>
                 </DialogActions>
