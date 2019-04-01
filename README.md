@@ -9,7 +9,7 @@ This project uses React v16.8 and was bootstrapped with [Create React App](https
 This project also uses:
 - Redux v4
 - Material UI v3
-- date-fns v1.30
+- date-fns v2.0.0.alpha-27
 
 ## Available Scripts
 
