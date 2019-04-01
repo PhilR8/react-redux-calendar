@@ -64,7 +64,7 @@ class Reminder extends React.Component {
     }
 
     render() {
-        const { classes, reminder } = this.props;
+        const { classes, reminder, onDeleteClick } = this.props;
         const deleteBtnClass = this.state.reminderFocused
             ? classes.deleteButtonVisible
             : classes.deleteButtonHidden;
@@ -80,7 +80,11 @@ class Reminder extends React.Component {
                 <Typography variant='h5' className={ classes.reminderText }>
                     { dateFns.format( reminder.time, 'H:mma' ) }: { reminder.text }
                 </Typography>
-                <IconButton className={ deleteBtnClass } aria-label="Delete">
+                <IconButton 
+                    className={ deleteBtnClass } 
+                    aria-label="Delete" 
+                    onClick={ () => onDeleteClick( reminder.date ) }
+                >
                     <DeleteIcon />
                 </IconButton>
             </Paper>
@@ -96,12 +100,13 @@ Reminder.propTypes = {
         time: PropTypes.instanceOf( Date ),
         color: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired
-    } )
+    } ),
+    onDeleteClick: PropTypes.func.isRequired
 }
 
 class AgendaDay extends React.Component {
     render() {
-        const { classes, agendaStatus, reminders, onClose } = this.props;
+        const { classes, agendaStatus, reminders, onClose, onDeleteClick } = this.props;
         return (
             <Dialog
                 open={ agendaStatus.isOpen }
@@ -127,7 +132,12 @@ class AgendaDay extends React.Component {
                                 No reminders found for this date.
                               </DialogContentText>
                             : reminders.map( ( reminder, i ) =>
-                                <Reminder key={ i } classes={ classes } reminder={ reminder } />
+                                <Reminder 
+                                    key={ i } 
+                                    classes={ classes } 
+                                    reminder={ reminder } 
+                                    onDeleteClick={ onDeleteClick }
+                                />
                             )
                     }
                 </DialogContent>
@@ -140,8 +150,9 @@ AgendaDay.propTypes = {
     classes: PropTypes.object.isRequired,
     calendarDate: PropTypes.instanceOf( Date ),
     dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ),
-    reminders: PropTypes.array.isRequired
-    // TODO: onClose callback function
+    reminders: PropTypes.array.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onDeleteClick: PropTypes.func.isRequired
 }
 
 export default withStyles( styles )( AgendaDay );

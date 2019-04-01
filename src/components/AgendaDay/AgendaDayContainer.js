@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import AgendaDay from './AgendaDay';
 
-import { closeAgenda } from '../../redux/actions';
+import { closeAgenda, deleteReminder } from '../../redux/actions';
 
 import * as dateFns from 'date-fns';
 
@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onClose: () => {
             dispatch( closeAgenda() );
+        },
+        onDeleteClick: date => {
+            dispatch( deleteReminder( date ) );
         }
     }
 }

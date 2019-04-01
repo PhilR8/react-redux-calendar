@@ -12,8 +12,8 @@ export function createReminder( reminderObj ) {
     return { type: CREATE_REMINDER, reminderObj };
 }
 
-export function deleteReminder( epochTime ) {
-    return { type: DELETE_REMINDER, epochTime };
+export function deleteReminder( date ) {
+    return { type: DELETE_REMINDER, date };
 }
 
 export function updateReminder( reminderObj ) {
