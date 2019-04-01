@@ -60,6 +60,18 @@ class AddReminder extends React.Component{
         this.state = this.initialState;
     }
 
+    static getDerivedStateFromProps( props, state ) {
+        if( props.addReminderStatus.reminder ){
+            const reminderToUpdate = props.addReminderStatus.reminder;
+            // hacky as heck, not supposed to do this
+            // we only want the reminder when the props first change from the redux store,
+            // and after this first change we scrub it out
+            props.addReminderStatus.reminder = null;
+            return reminderToUpdate;
+        }
+        return state;
+    }
+
     get initialState() {
         return {
             date: new Date(),
@@ -119,7 +131,7 @@ class AddReminder extends React.Component{
                             <DatePicker
                                 margin='normal'
                                 label='Choose Date'
-                                value={date}
+                                value={ date }
                                 onChange={this.handleDateChange}
                             />
                             <TimePicker
@@ -158,6 +170,7 @@ class AddReminder extends React.Component{
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        defaultValue={ text }
                         onChange={ this.handleReminderTextChange }
                     />
                     { text.length === 0 &&

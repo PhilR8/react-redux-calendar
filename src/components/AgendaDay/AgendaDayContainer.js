@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 
 import AgendaDay from './AgendaDay';
 
-import { closeAgenda, deleteReminder } from '../../redux/actions';
+import { closeAgenda, deleteReminder, openAddReminder } from '../../redux/actions';
 
 import * as dateFns from 'date-fns';
 
 const mapStateToProps = ( state, ownProps ) => {
-    const { agendaStatus } = ownProps;
+    const { agendaStatus } = state;
     const reminders = agendaStatus.isOpen
         ? state.reminders
             .filter( reminder => dateFns.isSameDay( reminder.date, agendaStatus.date ) )
@@ -24,6 +24,11 @@ const mapDispatchToProps = dispatch => {
         },
         onDeleteClick: date => {
             dispatch( deleteReminder( date ) );
+        },
+        onEditClick: reminder => {
+            dispatch( closeAgenda() );
+            dispatch( deleteReminder( reminder.date ) );
+            dispatch( openAddReminder( reminder ) );
         }
     }
 }

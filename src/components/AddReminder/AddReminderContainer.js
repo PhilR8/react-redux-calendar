@@ -5,7 +5,7 @@ import AddReminder from './AddReminder';
 import { closeAddReminder, createReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {
-    const { addReminderStatus } = ownProps;
+    const { addReminderStatus } = state;
 
     return { addReminderStatus };
 }

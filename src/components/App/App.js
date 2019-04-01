@@ -78,7 +78,7 @@ class App extends Component {
     }
 
     render() {
-        const { classes, agendaStatus, addReminderStatus, onFabAddClick } = this.props;
+        const { classes, agendaStatus, onFabAddClick } = this.props;
         const { date } = this.state;
 
         const month = date.toLocaleString( 'en-us', { month: 'long' } );
@@ -109,8 +109,8 @@ class App extends Component {
                         <AddIcon />
                     </Fab>
                 </Paper>
-                <AgendaDayContainer agendaStatus={ agendaStatus } />
-                <AddReminderContainer addReminderStatus={ addReminderStatus } />
+                <AgendaDayContainer />
+                <AddReminderContainer />
             </div>
         );
     }

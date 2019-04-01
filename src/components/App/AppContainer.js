@@ -5,9 +5,7 @@ import App from './App';
 import { openAddReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {
-    const { agendaStatus, addReminderStatus } = state;
-
-    return { agendaStatus, addReminderStatus };
+    return {};
 }
 
 const mapDispatchToProps = dispatch => {

@@ -15,7 +15,8 @@ const initialAgendaState = {
 }
 
 const initialAddReminderState = {
-    isOpen: false
+    isOpen: false,
+    reminder: null
 }
 
 function agendaStatus( state = initialAgendaState , action ) {
@@ -38,15 +39,18 @@ function addReminderStatus( state = initialAddReminderState, action ) {
     switch( action.type ) {
         case OPEN_ADD_REMINDER:
             return {
-                isOpen: true
+                isOpen: true,
+                reminder: action.reminder || null
             }
         case CLOSE_ADD_REMINDER:
             return {
-                isOpen: false
+                isOpen: false,
+                reminder: null
             }
         case CREATE_REMINDER:
             return {
-                isOpen: false
+                isOpen: false,
+                reminder: null
             }
         default: return state
     }
@@ -67,12 +71,16 @@ function reminders( state = [], action ) {
         case DELETE_REMINDER:
             return state.filter( reminder => reminder.date !== action.date )
         case UPDATE_REMINDER:
-            return state.map( reminder => {
-                if( reminder.date.getTime() === action.reminderObj.date.getTime() ) {
-                    return action.reminderObj
-                }  
-                return reminder
-            } )
+            const filteredState = state.filter( reminder => reminder.date !== action.oldReminder.date );
+            return [
+                ...filteredState,
+                {
+                    date: action.updatedReminder.date,
+                    time: action.updatedReminder.time,
+                    color: action.updatedReminder.color,
+                    text: action.updatedReminder.text
+                }
+            ]
         default: return state
     }
 }

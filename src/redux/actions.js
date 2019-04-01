@@ -28,8 +28,8 @@ export function closeAgenda() {
     return { type: CLOSE_AGENDA };
 }
 
-export function openAddReminder() {
-    return { type: OPEN_ADD_REMINDER };
+export function openAddReminder( reminder ) {
+    return { type: OPEN_ADD_REMINDER, reminder };
 }
 
 export function closeAddReminder() {

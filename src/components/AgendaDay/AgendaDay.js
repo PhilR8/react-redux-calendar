@@ -65,7 +65,7 @@ class Reminder extends React.Component {
     }
 
     render() {
-        const { classes, reminder, onDeleteClick } = this.props;
+        const { classes, reminder, onDeleteClick, onEditClick } = this.props;
         const toolbarBtnClass = this.state.reminderFocused
             ? classes.toolbarButtonVisible
             : classes.toolbarButtonHidden;
@@ -85,6 +85,7 @@ class Reminder extends React.Component {
                     <IconButton 
                         className={ toolbarBtnClass } 
                         aria-label='Edit' 
+                        onClick={ () => onEditClick( reminder ) }
                     >
                         <EditIcon />
                     </IconButton>
@@ -110,12 +111,13 @@ Reminder.propTypes = {
         color: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired
     } ),
-    onDeleteClick: PropTypes.func.isRequired
+    onDeleteClick: PropTypes.func.isRequired,
+    onEditClick: PropTypes.func.isRequired
 }
 
 class AgendaDay extends React.Component {
     render() {
-        const { classes, agendaStatus, reminders, onClose, onDeleteClick } = this.props;
+        const { classes, agendaStatus, reminders, onClose, onDeleteClick, onEditClick } = this.props;
         return (
             <Dialog
                 open={ agendaStatus.isOpen }
@@ -146,6 +148,7 @@ class AgendaDay extends React.Component {
                                     classes={ classes } 
                                     reminder={ reminder } 
                                     onDeleteClick={ onDeleteClick }
+                                    onEditClick={ onEditClick }
                                 />
                             )
                     }
@@ -161,7 +164,8 @@ AgendaDay.propTypes = {
     dateObj: PropTypes.shape( { date: PropTypes.instanceOf( Date ) } ),
     reminders: PropTypes.array.isRequired,
     onClose: PropTypes.func.isRequired,
-    onDeleteClick: PropTypes.func.isRequired
+    onDeleteClick: PropTypes.func.isRequired,
+    onEditClick: PropTypes.func.isRequired
 }
 
 export default withStyles( styles )( AgendaDay );
