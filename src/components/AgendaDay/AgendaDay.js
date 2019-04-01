@@ -8,6 +8,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
+import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -38,10 +39,10 @@ const styles = theme => ( {
         right: '10px',
         top: '10px'
     },
-    deleteButtonHidden: {
+    toolbarButtonHidden: {
         visibility: 'hidden'
     },
-    deleteButtonVisible: {
+    toolbarButtonVisible: {
         visibility: 'visible'
     }
 } );
@@ -65,9 +66,9 @@ class Reminder extends React.Component {
 
     render() {
         const { classes, reminder, onDeleteClick } = this.props;
-        const deleteBtnClass = this.state.reminderFocused
-            ? classes.deleteButtonVisible
-            : classes.deleteButtonHidden;
+        const toolbarBtnClass = this.state.reminderFocused
+            ? classes.toolbarButtonVisible
+            : classes.toolbarButtonHidden;
 
         return (
             <Paper
@@ -80,13 +81,21 @@ class Reminder extends React.Component {
                 <Typography variant='h5' className={ classes.reminderText }>
                     { dateFns.format( reminder.time, 'H:mma' ) }: { reminder.text }
                 </Typography>
-                <IconButton 
-                    className={ deleteBtnClass } 
-                    aria-label="Delete" 
-                    onClick={ () => onDeleteClick( reminder.date ) }
-                >
-                    <DeleteIcon />
-                </IconButton>
+                <div>
+                    <IconButton 
+                        className={ toolbarBtnClass } 
+                        aria-label='Edit' 
+                    >
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton 
+                        className={ toolbarBtnClass } 
+                        aria-label='Delete' 
+                        onClick={ () => onDeleteClick( reminder.date ) }
+                    >
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
             </Paper>
 
         )
