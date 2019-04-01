@@ -57,12 +57,25 @@ class AddReminder extends React.Component{
     constructor( props ) {
         super( props );
 
-        this.state = {
+        this.state = this.initialState;
+    }
+
+    get initialState() {
+        return {
             date: new Date(),
             time: new Date(),
             color: '#f8bbd0',
             text: ''
-        }
+        };
+    }
+
+    onEvent = function( fn, args ) {
+        fn( args );
+        this.resetState();
+    }
+
+    resetState = () => {
+        this.setState( this.initialState );
     }
 
     handleDateChange = date => {
@@ -88,14 +101,14 @@ class AddReminder extends React.Component{
         return (
             <Dialog
                 open={ addReminderStatus.isOpen }
-                onClose={ onClose }
+                onClose={ () => this.onEvent( onClose ) }
                 aria-labelledby='form-dialog-title'
                 fullWidth={ true }
                 maxWidth='md'
             >
                 <DialogTitle id='form-dialog-title'>
                     Add Reminder
-                    <IconButton aria-label='Close' className={ classes.closeButton } onClick={ onClose }>
+                    <IconButton aria-label='Close' className={ classes.closeButton } onClick={ () => this.onEvent( onClose ) }>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
@@ -155,7 +168,7 @@ class AddReminder extends React.Component{
                     }
                 </DialogContent>
                 <DialogActions>
-                    <Button disabled={ text.length === 0 || text.length > 30 } color='primary' onClick={ () => onAddClick( this.state ) }>
+                    <Button disabled={ text.length === 0 || text.length > 30 } color='primary' onClick={ () => this.onEvent( onAddClick, this.state ) }>
                         Add Reminder
                     </Button>
                 </DialogActions>

@@ -44,6 +44,10 @@ function addReminderStatus( state = initialAddReminderState, action ) {
             return {
                 isOpen: false
             }
+        case CREATE_REMINDER:
+            return {
+                isOpen: false
+            }
         default: return state
     }
 }
