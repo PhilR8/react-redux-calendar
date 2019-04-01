@@ -11,7 +11,7 @@ import './index.css';
 
 const store = createStore( 
     calendarApp,
-    { reminders: [ { date: new Date(), time: new Date(), color: '#f8bbd0', text: 'Click a day to create reminder' } ] }, // preloaded state
+    { reminders: [ { date: new Date(), time: new Date(), color: '#f8bbd0', text: 'Your first reminder!' } ] }, // preloaded state
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
