@@ -79,7 +79,7 @@ class Reminder extends React.Component {
                 onMouseOut={ this.onReminderMouseOut }
             >
                 <Typography variant='h5' className={ classes.reminderText }>
-                    { dateFns.format( reminder.time, 'H:mma' ) }: { reminder.text }
+                    { dateFns.format( reminder.time, 'H:mmaaaaa' ) }: { reminder.text }
                 </Typography>
                 <div>
                     <IconButton 

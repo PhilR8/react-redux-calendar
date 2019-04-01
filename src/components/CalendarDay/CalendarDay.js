@@ -67,7 +67,7 @@ const styles = theme => ( {
 const Reminder = ( props ) =>
     <div className={ props.classes.reminder } style={{ backgroundColor: props.reminder.color }}>
         <Typography variant='caption'>
-            { format( props.reminder.time, 'H:mma' ) }: { props.reminder.text }
+            { format( props.reminder.time, 'H:mmaaaaa' ) }: { props.reminder.text }
         </Typography>
     </div>
 
