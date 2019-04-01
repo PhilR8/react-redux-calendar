@@ -10,6 +10,7 @@ const mapStateToProps = ( state, ownProps ) => {
     const reminders = state.reminders.filter( reminder =>
         dateFns.isSameDay( reminder.date, ownProps.dateObj.date )
     )
+    reminders.sort( ( a, b ) => dateFns.getTime( a.time ) - dateFns.getTime( b.time ) );
     return { reminders };
 }
 

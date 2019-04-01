@@ -59,7 +59,7 @@ const styles = theme => ( {
 const Reminder = ( props ) => 
     <div className={ props.classes.reminder } style={{ backgroundColor: props.reminder.color }}>
         <Typography variant='caption'>
-            { dateFns.format( props.reminder.date, 'H:mma' ) }: { props.reminder.text }
+            { dateFns.format( props.reminder.time, 'H:mma' ) }: { props.reminder.text }
         </Typography>
     </div>
 
@@ -105,7 +105,7 @@ class CalendarDay extends Component {
                 }
             >
                 <Avatar className={ avatarClass }>{ dateFns.getDate( dateObj.date ) }</Avatar>
-                { reminders.map( ( reminder, i ) => 
+                { reminders.map( ( reminder, i ) =>
                     <Reminder key={ i } reminder={ reminder } classes={ classes } /> 
                 ) }
             </div>

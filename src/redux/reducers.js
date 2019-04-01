@@ -55,6 +55,7 @@ function reminders( state = [], action ) {
                 ...state,
                 {
                     date: action.reminderObj.date,
+                    time: action.reminderObj.time,
                     color: action.reminderObj.color,
                     text: action.reminderObj.text
                 }

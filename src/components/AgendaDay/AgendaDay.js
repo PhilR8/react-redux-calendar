@@ -67,7 +67,7 @@ class AgendaDay extends React.Component {
                                     style={{ backgroundColor: reminder.color }}
                                 >
                                     <Typography variant='h5'>
-                                        { dateFns.format( reminder.date, 'H:mma' ) }: { reminder.text }
+                                        { dateFns.format( reminder.time, 'H:mma' ) }: { reminder.text }
                                     </Typography>
                                 </Paper>
                             ) 
