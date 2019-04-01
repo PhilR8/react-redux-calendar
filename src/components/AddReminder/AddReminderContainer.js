@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import AddReminder from './AddReminder';
 
-import { closeAddReminder } from '../../redux/actions';
+import { closeAddReminder, createReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {
     const { addReminderStatus } = ownProps;
@@ -14,6 +14,9 @@ const mapDispatchToProps = dispatch => {
     return {
         onClose: () => {
             dispatch( closeAddReminder() );
+        },
+        onAddClick: reminderObj => {
+            dispatch( createReminder( reminderObj ) );
         }
     }    
 }

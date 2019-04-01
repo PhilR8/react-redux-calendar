@@ -53,32 +53,32 @@ class AddReminder extends React.Component{
         super( props );
 
         this.state = {
-            selectedDate: new Date(),
-            selectedTime: new Date(),
-            selectedColor: '#f8bbd0',
-            reminderText: ''
+            date: new Date(),
+            time: new Date(),
+            color: '#f8bbd0',
+            text: ''
         }
     }
 
     handleDateChange = date => {
-        this.setState({ selectedDate: date });
+        this.setState({ date: date });
     };
 
     handleTimeChange = date => {
-        this.setState({ selectedTime: date });
+        this.setState({ time: date });
     }
 
     handleColorChange = event => {
-        this.setState({ selectedColor: event.target.value });
+        this.setState({ color: event.target.value });
     }
 
     handleReminderTextChange = event => {
-        this.setState({ reminderText: event.target.value }); 
+        this.setState({ text: event.target.value }); 
     }
 
     render() {
-        const { classes, addReminderStatus, onClose } = this.props;
-        const { selectedDate, selectedTime, selectedColor } = this.state;
+        const { classes, addReminderStatus, onClose, onAddClick } = this.props;
+        const { date, time, color } = this.state;
 
         return (
             <Dialog
@@ -101,13 +101,13 @@ class AddReminder extends React.Component{
                             <DatePicker 
                                 margin='normal'
                                 label='Choose Date'
-                                value={selectedDate}
+                                value={date}
                                 onChange={this.handleDateChange}
                             />
                             <TimePicker 
                                 margin='normal'
                                 label='Choose Time'
-                                value={selectedTime}
+                                value={time}
                                 onChange={this.handleTimeChange}
                             />
                             <FormControl className={classes.formControl}>
@@ -115,7 +115,7 @@ class AddReminder extends React.Component{
                                     Choose Color
                                 </InputLabel>
                                 <Select
-                                    value={selectedColor}
+                                    value={color}
                                     onChange={this.handleColorChange}
                                     input={<Input name='color' id='color-label-placeholder' />}
                                     name='color'
@@ -144,7 +144,7 @@ class AddReminder extends React.Component{
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button color='primary'>
+                    <Button color='primary' onClick={ () => onAddClick( this.state ) }>
                         Add Reminder
                     </Button>
                 </DialogActions>
@@ -156,6 +156,7 @@ class AddReminder extends React.Component{
 AddReminder.propTypes = {
     classes: PropTypes.object.isRequired
     // TODO: onClose callback function
+    // TODO: onAddClick callback function
 }
 
 export default withStyles( styles )( AddReminder );
