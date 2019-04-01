@@ -6,18 +6,23 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import dateFns from 'date-fns';
+import { format, isSameMonth, isSameDay, getDate } from 'date-fns';
 
 const styles = theme => ( {
     dayCell: {
+        display: 'flex',
         flex: '1 0 13%',
+        flexDirection: 'column',
         border: '1px solid lightgray',
         cursor: 'pointer'
     },
     dayCellOutsideMonth: {
+        display: 'flex',
         flex: '1 0 13%',
+        flexDirection: 'column',
         border: '1px solid lightgray',
-        backgroundColor: 'rgba( 211, 211, 211, 0.4 )'
+        backgroundColor: 'rgba( 211, 211, 211, 0.4 )',
+        cursor: 'pointer'
     },
     dateNumber: {
         margin: 5,
@@ -53,13 +58,16 @@ const styles = theme => ( {
     }, 
     reminder: {
         color: '#000'
+    },
+    remindersContainer: {
+        height: '100%'
     }
 } );
 
 const Reminder = ( props ) => 
     <div className={ props.classes.reminder } style={{ backgroundColor: props.reminder.color }}>
         <Typography variant='caption'>
-            { dateFns.format( props.reminder.time, 'H:mma' ) }: { props.reminder.text }
+            { format( props.reminder.time, 'H:mma' ) }: { props.reminder.text }
         </Typography>
     </div>
 
@@ -83,7 +91,7 @@ class CalendarDay extends Component {
     render() {
         const { classes, dateObj, calendarDate, reminders, onDayClick } = this.props;
         const { focused } = this.state;
-        const isToday = dateFns.isToday( dateObj.date );
+        const isToday = isSameDay( dateObj.date, new Date() );
 
         const avatarClass = isToday && focused
             ? classes.focusedTodayAvatar
@@ -99,15 +107,24 @@ class CalendarDay extends Component {
                 onMouseOut={ this.onMouseOut }
                 onClick={ () => onDayClick( dateObj ) }
                 className={ 
-                    dateFns.isSameMonth( dateObj.date, calendarDate ) 
+                    isSameMonth( dateObj.date, calendarDate ) 
                         ? classes.dayCell 
                         : classes.dayCellOutsideMonth 
                 }
             >
-                <Avatar className={ avatarClass }>{ dateFns.getDate( dateObj.date ) }</Avatar>
-                { reminders.map( ( reminder, i ) =>
-                    <Reminder key={ i } reminder={ reminder } classes={ classes } /> 
-                ) }
+                <Avatar className={ avatarClass }>{ getDate( dateObj.date ) }</Avatar>
+                <div className={ classes.remindersContainer }>
+                    { reminders
+                        .slice( 0, 3 )
+                        .map( ( reminder, i ) =>
+                            <Reminder key={ i } reminder={ reminder } classes={ classes } /> 
+                    ) }
+                    { reminders.length > 3 &&
+                        <Typography variant='caption'>
+                            ...and { reminders.length - 3 } more 
+                        </Typography>
+                    }
+                </div>
             </div>
         )
     }

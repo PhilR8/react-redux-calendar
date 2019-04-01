@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import dateFns from 'date-fns';
+import * as dateFns from 'date-fns';
 
 const styles = theme => ( {
     remindersContainer: {

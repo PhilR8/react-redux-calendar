@@ -4,7 +4,7 @@ import AgendaDay from './AgendaDay';
 
 import { closeAgenda } from '../../redux/actions';
 
-import dateFns from 'date-fns';
+import * as dateFns from 'date-fns';
 
 const mapStateToProps = ( state, ownProps ) => {
     const { agendaStatus } = ownProps;

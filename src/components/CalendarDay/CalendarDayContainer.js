@@ -4,7 +4,7 @@ import CalendarDay from './CalendarDay';
 
 import { openAgenda } from '../../redux/actions';
 
-import dateFns from 'date-fns';
+import * as dateFns from 'date-fns';
 
 const mapStateToProps = ( state, ownProps ) => {
     const reminders = state.reminders.filter( reminder =>
