@@ -45,7 +45,7 @@ class AgendaDay extends React.Component {
             >
                 <DialogTitle id='form-dialog-title'>
                     { agendaStatus.date
-                        ? dateFns.format( agendaStatus.date, 'dddd MMMM Do, YYYY' ) 
+                        ? dateFns.format( agendaStatus.date, 'LLLL do, yyyy' ) 
                         : 'Closing' // dialog close animation takes a while - need to figure this out
                     }
                     <IconButton aria-label='Close' className={ classes.closeButton } onClick={ onClose }>
