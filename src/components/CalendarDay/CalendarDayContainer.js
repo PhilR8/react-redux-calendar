@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
+
 import CalendarDay from './CalendarDay';
+
 import { openAgenda } from '../../redux/actions';
 
 import dateFns from 'date-fns';

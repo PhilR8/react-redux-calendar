@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
-import AddReminder from './AddReminder';
-import { closeAddReminder } from '../../redux/actions';
 
-import dateFns from 'date-fns';
+import AddReminder from './AddReminder';
+
+import { closeAddReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {
     const { addReminderStatus } = ownProps;

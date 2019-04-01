@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import AppContainer from './components/App/AppContainer';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import calendarApp from './redux/reducers';
+
 import * as serviceWorker from './serviceWorker';
+import './index.css';
 
 const store = createStore( 
     calendarApp,
-    { reminders: [ { date: new Date(), color: 'pink', text: 'Click a day to create reminder' } ] }, // preloaded state
+    { reminders: [ { date: new Date(), color: '#f8bbd0', text: 'Click a day to create reminder' } ] }, // preloaded state
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

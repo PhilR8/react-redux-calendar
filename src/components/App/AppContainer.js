@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
+
 import App from './App';
+
 import { openAddReminder } from '../../redux/actions';
 
 const mapStateToProps = ( state, ownProps ) => {

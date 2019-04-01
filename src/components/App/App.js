@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import green from '@material-ui/core/colors/green';
 import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import green from '@material-ui/core/colors/green';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import dateFns from 'date-fns';
 
 import CalendarGrid from '../CalendarGrid/CalendarGrid';
-
 import AgendaDayContainer from '../AgendaDay/AgendaDayContainer';
 import AddReminderContainer from '../AddReminder/AddReminderContainer';
 
@@ -89,21 +88,21 @@ class App extends Component {
             <div className={ classes.root }>
                 <Paper className={ classes.calendar }>
                     <header className={ classes.calendarHeader }>
-                        <IconButton aria-label="Last Month" onClick={ this.prevMonth }>
-                            <KeyboardArrowLeftIcon fontSize="large" />
+                        <IconButton aria-label='Last Month' onClick={ this.prevMonth }>
+                            <KeyboardArrowLeftIcon fontSize='large' />
                         </IconButton>
-                        <Typography variant="h3">
+                        <Typography variant='h3'>
                             { month } { year }
                         </Typography>               
-                        <IconButton aria-label="Next Month" onClick={ this.nextMonth }>
-                            <KeyboardArrowRightIcon fontSize="large" />
+                        <IconButton aria-label='Next Month' onClick={ this.nextMonth }>
+                            <KeyboardArrowRightIcon fontSize='large' />
                         </IconButton>
                     </header>
                     <CalendarGrid 
                         date={ date } 
                     />
                     <Fab 
-                        aria-label="Add" 
+                        aria-label='Add' 
                         className={classes.fabAdd}
                         onClick={ onFabAddClick }
                     >

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -33,7 +34,7 @@ const styles = theme => ( {
     }
 } );
 
-const DayName = ( props ) => <Typography variant="h6">{ props.day }</Typography>;
+const DayName = ( props ) => <Typography variant='h6'>{ props.day }</Typography>;
 
 DayName.propTypes = {
     classes: PropTypes.object.isRequired,
