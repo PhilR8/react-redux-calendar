@@ -91,7 +91,7 @@ class AddReminder extends React.Component{
     }
 
     handleReminderTextChange = event => {
-        this.setState({ text: event.target.value }); 
+        this.setState({ text: event.target.value });
     }
 
     render() {
@@ -116,13 +116,13 @@ class AddReminder extends React.Component{
                 <DialogContent className={ classes.addReminderFormContainer }>
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <div className={ classes.pickers }>
-                            <DatePicker 
+                            <DatePicker
                                 margin='normal'
                                 label='Choose Date'
                                 value={date}
                                 onChange={this.handleDateChange}
                             />
-                            <TimePicker 
+                            <TimePicker
                                 margin='normal'
                                 label='Choose Time'
                                 value={time}

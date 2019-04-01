@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
         onAddClick: reminderObj => {
             dispatch( createReminder( reminderObj ) );
         }
-    }    
+    }
 }
 
 const AddReminderContainer = connect( mapStateToProps, mapDispatchToProps )( AddReminder );

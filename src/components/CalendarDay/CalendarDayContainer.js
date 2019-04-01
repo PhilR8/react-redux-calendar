@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => {
         onDayClick: dateObj => {
             dispatch( openAgenda( dateObj ) )
         }
-    }    
+    }
 }
 
 const CalendarDayContainer = connect( mapStateToProps, mapDispatchToProps )( CalendarDay );

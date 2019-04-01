@@ -59,13 +59,13 @@ class App extends Component {
     constructor( props ) {
         super( props );
 
-        this.state = { 
+        this.state = {
             date: new Date()
         };
     }
 
     compnentDidMount() {
-        
+
     }
 
     // arrow functions to skip binding in constructor
@@ -93,16 +93,16 @@ class App extends Component {
                         </IconButton>
                         <Typography variant='h3'>
                             { month } { year }
-                        </Typography>               
+                        </Typography>
                         <IconButton aria-label='Next Month' onClick={ this.nextMonth }>
                             <KeyboardArrowRightIcon fontSize='large' />
                         </IconButton>
                     </header>
-                    <CalendarGrid 
-                        date={ date } 
+                    <CalendarGrid
+                        date={ date }
                     />
-                    <Fab 
-                        aria-label='Add' 
+                    <Fab
+                        aria-label='Add'
                         className={classes.fabAdd}
                         onClick={ onFabAddClick }
                     >

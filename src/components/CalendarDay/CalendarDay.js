@@ -55,7 +55,7 @@ const styles = theme => ( {
         fontSize: '0.85rem',
         color: '#fff',
         backgroundColor: deepPurple[800],
-    }, 
+    },
     reminder: {
         color: '#000'
     },
@@ -64,7 +64,7 @@ const styles = theme => ( {
     }
 } );
 
-const Reminder = ( props ) => 
+const Reminder = ( props ) =>
     <div className={ props.classes.reminder } style={{ backgroundColor: props.reminder.color }}>
         <Typography variant='caption'>
             { format( props.reminder.time, 'H:mma' ) }: { props.reminder.text }
@@ -102,14 +102,14 @@ class CalendarDay extends Component {
                     : classes.dateNumber;
 
         return (
-            <div 
+            <div
                 onMouseOver={ this.onMouseOver }
                 onMouseOut={ this.onMouseOut }
                 onClick={ () => onDayClick( dateObj ) }
-                className={ 
-                    isSameMonth( dateObj.date, calendarDate ) 
-                        ? classes.dayCell 
-                        : classes.dayCellOutsideMonth 
+                className={
+                    isSameMonth( dateObj.date, calendarDate )
+                        ? classes.dayCell
+                        : classes.dayCellOutsideMonth
                 }
             >
                 <Avatar className={ avatarClass }>{ getDate( dateObj.date ) }</Avatar>
@@ -117,11 +117,11 @@ class CalendarDay extends Component {
                     { reminders
                         .slice( 0, 3 )
                         .map( ( reminder, i ) =>
-                            <Reminder key={ i } reminder={ reminder } classes={ classes } /> 
+                            <Reminder key={ i } reminder={ reminder } classes={ classes } />
                     ) }
                     { reminders.length > 3 &&
                         <Typography variant='caption'>
-                            ...and { reminders.length - 3 } more 
+                            ...and { reminders.length - 3 } more
                         </Typography>
                     }
                 </div>

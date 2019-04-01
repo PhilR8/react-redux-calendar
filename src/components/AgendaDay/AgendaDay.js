@@ -37,9 +37,9 @@ const styles = theme => ( {
         position: 'absolute',
         right: '10px',
         top: '10px'
-    }, 
+    },
     deleteButtonHidden: {
-        visibility: 'hidden'  
+        visibility: 'hidden'
     },
     deleteButtonVisible: {
         visibility: 'visible'
@@ -58,20 +58,20 @@ class Reminder extends React.Component {
     onReminderMouseOver = () => {
         this.setState( { reminderFocused: true } );
     }
-    
+
     onReminderMouseOut = () => {
         this.setState( { reminderFocused: false } );
     }
-     
+
     render() {
         const { classes, reminder } = this.props;
         const deleteBtnClass = this.state.reminderFocused
             ? classes.deleteButtonVisible
             : classes.deleteButtonHidden;
-            
+
         return (
-            <Paper 
-                className={ classes.reminder } 
+            <Paper
+                className={ classes.reminder }
                 elevation={ 1 }
                 style={{ backgroundColor: reminder.color }}
                 onMouseOver={ this.onReminderMouseOver }
@@ -84,8 +84,8 @@ class Reminder extends React.Component {
                     <DeleteIcon />
                 </IconButton>
             </Paper>
-            
-        ) 
+
+        )
     }
 }
 
@@ -112,7 +112,7 @@ class AgendaDay extends React.Component {
             >
                 <DialogTitle id='form-dialog-title'>
                     { agendaStatus.date
-                        ? dateFns.format( agendaStatus.date, 'LLLL do, yyyy' ) 
+                        ? dateFns.format( agendaStatus.date, 'LLLL do, yyyy' )
                         : 'Closing' // dialog close animation takes a while - need to figure this out
                     }
                     <IconButton aria-label='Close' className={ classes.closeButton } onClick={ onClose }>
@@ -121,14 +121,14 @@ class AgendaDay extends React.Component {
                 </DialogTitle>
                 <Divider light />
                 <DialogContent className={ classes.remindersContainer }>
-                    { 
+                    {
                         reminders.length === 0
                             ? <DialogContentText className={ classes.noRemindersText }>
                                 No reminders found for this date.
                               </DialogContentText>
-                            : reminders.map( ( reminder, i ) => 
+                            : reminders.map( ( reminder, i ) =>
                                 <Reminder key={ i } classes={ classes } reminder={ reminder } />
-                            ) 
+                            )
                     }
                 </DialogContent>
             </Dialog>

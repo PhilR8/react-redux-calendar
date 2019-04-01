@@ -44,7 +44,7 @@ DayName.propTypes = {
 const DaysRow = ( props ) =>
     <div className={ props.classes.daysRow }>
         { daysArr.map( ( day, i ) =>
-            <DayName classes={ props.classes } key={ i } day={ day } /> 
+            <DayName classes={ props.classes } key={ i } day={ day } />
         ) }
     </div>
 
@@ -52,7 +52,7 @@ DaysRow.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-const MonthContainer = ( props ) => 
+const MonthContainer = ( props ) =>
     <div className={ props.classes.monthContainer }>
         { props.calendarCells.map( ( dateObj, i ) =>
             <CalendarDayContainer key={ i } calendarDate={ props.date } dateObj={ dateObj } />
@@ -72,8 +72,8 @@ class CalendarGrid extends Component {
         return (
             <div className={ classes.calendarGrid }>
                 <DaysRow classes={ classes } />
-                <MonthContainer 
-                    classes={ classes } 
+                <MonthContainer
+                    classes={ classes }
                     date={ date }
                     calendarCells={ calendarCells }
                 />

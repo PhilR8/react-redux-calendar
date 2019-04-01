@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
         onClose: () => {
             dispatch( closeAgenda() );
         }
-    }    
+    }
 }
 
 const AgendaDayContainer = connect( mapStateToProps, mapDispatchToProps )( AgendaDay );
